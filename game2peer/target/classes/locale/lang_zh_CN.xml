@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">  
+<properties>  
+    <comment>公共</comment>  
+    <entry key="welcome">邀你一起来玩</entry>  
+    <entry key="signup">注册</entry>
+</properties>  

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link rel="shortcut icon" href="style/images/favicon.png" th:href="@{/style/images/favicon.png}"/>
+<title th:text="${__title}">用户注册</title>
+<!-- Bootstrap core CSS -->
+<link href="style/css/bootstrap.css" th:href="@{/style/css/bootstrap.css}" rel="stylesheet"/>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="style/js/html5shiv.js" th:src="@{/style/js/html5shiv.js}" ></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+<link th:replace="${__content_page}::css"/>
+</head>
+<body>
+<div class="container" th:replace="${__content_page}::content">
+
+</div>
+<script src="style/js/jquery.min.js" th:src="@{/style/js/jquery.min.js}"></script>  
+<script src="style/js/bootstrap.min.js" th:src="@{/style/js/bootstrap.min.js}"></script> 
+<script th:replace="${__content_page}::javascript"></script>
+</body>
+</html>

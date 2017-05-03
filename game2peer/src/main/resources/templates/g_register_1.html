@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:fragment="css" href="style/css/signin.css" th:href="@{/style/css/signin.css}" rel="stylesheet"/>      
+</head>
+<body>
+    <div class="container" th:fragment="content">
+      <form class="form-signin" th:action="${action}" method="post" th:object="${gameuser}">
+        <img class="img-responsive" src="/assets/images/1.jpg" th:src="${game.coverImage}" alt=""/>
+        <h3 class="form-signin-heading" th:inline="text">[[${user.niceName}+#{welcome}]]</h3>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="Username" th:field="*{username}" required="required" autofocus="autofocus"/>
+        <label for="password" class="sr-only">Password</label>
+	    <input type="password" class="form-control" style="border-bottom-right-radius: 0;border-bottom-left-radius: 0;" id="password" th:field="*{password}" placeholder="Password" required="required"/>
+        <label for="re_password" class="sr-only">Re-Password</label>
+	    <input type="password" class="form-control" style="margin-bottom: 10px" id="re_password" placeholder="Password" th:field="*{re_password}" required="required"/>	
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{signup}">Sign up</button>
+      </form>
+    </div>
+    <!-- /container -->
+</body>
+</html>
