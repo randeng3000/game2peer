@@ -1,0 +1,338 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content=""/>
+<meta name="author" content=""/>
+<link rel="shortcut icon" href="style/images/favicon.png" th:href="@{/style/images/favicon.png}"/>
+<title>Loom</title>
+<!-- Bootstrap core CSS -->
+<link href="style/css/bootstrap.css" th:href="@{/style/css/bootstrap.css}" rel="stylesheet"/>
+<link href="style/css/settings.css" th:href="@{/style/css/settings.css}" rel="stylesheet"/>
+<link href="style/css/owl.carousel.css" th:href="@{/style/css/owl.carousel.css}" rel="stylesheet"/>
+<link href="style/js/google-code-prettify/prettify.css" th:href="@{/style/js/google-code-prettify/prettify.css}" rel="stylesheet"/>
+<link href="style/js/fancybox/jquery.fancybox.css" th:href="@{/style/js/fancybox/jquery.fancybox.css}" rel="stylesheet" type="text/css" media="all"/>
+<link href="style/js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.2" th:href="@{/style/js/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.2}" rel="stylesheet" type="text/css" />
+<link href="style/style.css" th:href="@{/style/style.css}" rel="stylesheet"/>
+<link href="style/css/color/green.css" th:href="@{/style/css/color/green.css}" rel="stylesheet" />
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700,800,900' rel='stylesheet' type='text/css'/>
+<link href="style/type/fontello.css" th:href="@{/style/type/fontello.css}" rel="stylesheet"/>
+<link href="style/type/picons.css" th:href="@{/style/type/picons.css}" rel="stylesheet"/>
+<link href="style/type/budicons.css" th:href="@{/style/type/budicons.css}" rel="stylesheet"/>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="style/js/html5shiv.js" th:src="@{/style/js/html5shiv.js}" ></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      <![endif]-->
+
+</head>
+<body>
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+<div class="body-wrapper">
+  <div class="navbar basic default">
+    <div class="navbar-header">
+      <div class="container">
+        <div class="basic-wrapper"> <a class="btn responsive-menu pull-right" data-toggle="collapse" data-target=".navbar-collapse"><i class='icon-menu-1'></i></a> <a class="navbar-brand" href="index.html"><img src="style/images/logo.png" data-at2x="style/images/logo@2x.png" alt="" /></a> </div>
+        <div class="collapse navbar-collapse pull-right">
+          <ul class="nav navbar-nav">
+            <li class="dropdown"><a href="#" class="dropdown-toggle js-activated">Home</a>
+              <ul class="dropdown-menu">
+                <li><a href="index.html">Business Style</a></li>
+                <li><a href="index2.html">Agency Style</a></li>
+                <li><a href="index3.html">Corporate Style</a></li>
+                <li><a href="index4.html">Landing Page</a></li>
+                <li><a href="index5.html">Fullwidth Slider</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle js-activated">Portfolio</a>
+              <ul class="dropdown-menu">
+                <li><a href="portfolio.html">Fullsreen Grid</a></li>
+                <li><a href="portfolio2.html">Classic Grid</a></li>
+                <li><a href="portfolio3.html">Fullsreen Grid Lightbox</a></li>
+                <li><a href="portfolio4.html">Classic Grid Lightbox</a></li>
+                <li><a href="portfolio-post.html">Post with Full Slider</a></li>
+                <li><a href="portfolio-post2.html">Post with Half Slider</a></li>
+                <li><a href="portfolio-post3.html">Post with Images</a></li>
+                <li><a href="portfolio-post4.html">Post with Video</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle js-activated">Blog</a>
+              <ul class="dropdown-menu">
+                <li><a href="blog.html">Grid Blog</a></li>
+                <li><a href="blog2.html">Grid Blog with Sidebar</a></li>
+                <li><a href="blog3.html">Classic Blog</a></li>
+                <li><a href="blog-post.html">Blog Post</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle js-activated">Pages</a>
+              <ul class="dropdown-menu">
+                <li><a href="about.html">About</a></li>
+                <li><a href="about2.html">About 2</a></li>
+                <li><a href="services.html">Services</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle js-activated">Features</a>
+              <ul class="dropdown-menu">
+                <li><a href="elements.html">Elements</a></li>
+                <li><a href="headings.html">Headings</a></li>
+                <li><a href="index.html">Footer with Widgets</a></li>
+                <li><a href="footer.html">Footer with Single Widget</a></li>
+                <li><a href="pricing.html">Pricing Table</a></li>
+                <li><a href="picons.html">Font Icons - Picons</a></li>
+                <li><a href="budicons.html">Font Icons - Budicons</a></li>
+                <li><a href="fontello.html">Font Icons - Fontello</a></li>
+              </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--/.nav-collapse --> 
+  </div>
+
+  
+  <!--/.navbar -->
+  <div class="offset"></div>
+  <div class="light-wrapper">
+    <div class="container inner">
+      
+      
+      <div class="portfolio fix-portfolio">
+        <ul class="filter">
+          <li><a class="active" href="#" data-filter="*">全部游戏</a></li>
+          <li><a href="#" data-filter=".web">游戏类型1</a></li>
+          <li><a href="#" data-filter=".graphic">游戏类型2</a></li>
+          <li><a href="#" data-filter=".video">游戏类型3</a></li>
+          <li><a href="#" data-filter=".photography">游戏类型4</a></li>
+        </ul>
+        <!-- /.filter -->
+        
+        <ul class="items col4" id="gamelist">
+          <li class="item thumb graphic">
+            <figure><a href="portfolio-post.html">
+              <div class="text-overlay">
+                <div class="info">Stationary Branding Mockup</div>
+              </div>
+              <img src="style/images/art/p1.jpg"  th:src="@{/style/images/art/p1.jpg}" alt="" /></a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb graphic">
+            <figure><a href="portfolio-post2.html">
+              <div class="text-overlay">
+                <div class="info">Business Card Mockup</div>
+              </div>
+              <img src="style/images/art/p2.jpg"  th:src="@{/style/images/art/p2.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb video">
+            <figure><a href="portfolio-post3.html">
+              <div class="text-overlay">
+                <div class="info">Bi-fold Mockup</div>
+              </div>
+              <img src="style/images/art/p3.jpg"  th:src="@{/style/images/art/p3.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb web">
+            <figure><a href="portfolio-post4.html">
+              <div class="text-overlay">
+                <div class="info">Infographic Elements</div>
+              </div>
+              <img src="style/images/art/p4.jpg"  th:src="@{/style/images/art/p4.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb web">
+            <figure><a href="portfolio-post.html">
+              <div class="text-overlay">
+                <div class="info">Business Cards</div>
+              </div>
+              <img src="style/images/art/p5.jpg"  th:src="@{/style/images/art/p5.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb photography">
+            <figure><a href="portfolio-post2.html">
+              <div class="text-overlay">
+                <div class="info">Cover Disk Mockup</div>
+              </div>
+              <img src="style/images/art/p6.jpg"  th:src="@{/style/images/art/p6.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb graphic">
+            <figure><a href="portfolio-post3.html">
+              <div class="text-overlay">
+                <div class="info">Business Cards</div>
+              </div>
+              <img src="style/images/art/p7.jpg"  th:src="@{/style/images/art/p7.jpg}" alt="" /> </a></figure>
+          </li>
+          <li class="item thumb graphic">
+            <figure><a href="portfolio-post4.html">
+              <div class="text-overlay">
+                <div class="info">Phortio iPhone App</div>
+              </div>
+              <img src="style/images/art/p8.jpg"  th:src="@{/style/images/art/p8.jpg}" alt="" /> </a></figure>
+          </li>
+          
+        </ul>
+        <!-- /.items --> 
+      </div>
+      <!-- /.portfolio --> 
+    </div>
+  </div>
+  
+
+  <!-- /footer --> 
+  
+</div>
+<!-- /.body-wrapper --> 
+
+
+<div id="navi"><a href="/demo/getDemo?page=1" th:href="@{/demo/getDemo?page=1}"></a></div>
+  
+<!-- /canvas -->
+
+
+<script src="style/js/jquery.min.js" th:src="@{/style/js/jquery.min.js}"></script>  
+<script src="style/js/bootstrap.min.js" th:src="@{/style/js/bootstrap.min.js}"></script> 
+<script src="style/js/twitter-bootstrap-hover-dropdown.min.js" th:src="@{/style/js/twitter-bootstrap-hover-dropdown.min.js}"></script> 
+<script src="style/js/jquery.themepunch.plugins.min.js" th:src="@{/style/js/jquery.themepunch.plugins.min.js}"></script> 
+<script src="style/js/jquery.themepunch.revolution.min.js" th:src="@{/style/js/jquery.themepunch.revolution.min.js}"></script> 
+<script src="style/js/jquery.fancybox.pack.js" th:src="@{/style/js/jquery.fancybox.pack.js}"></script> 
+<script src="style/js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.2" th:src="@{/style/js/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.2}"></script> 
+<script src="style/js/fancybox/helpers/jquery.fancybox-media.js?v=1.0.0" th:src="@{/style/js/fancybox/helpers/jquery.fancybox-media.js?v=1.0.0}"></script> 
+<script src="style/js/jquery.isotope.min.js" th:src="@{/style/js/jquery.isotope.min.js}"></script>
+<script src="style/js/jquery.infinitescroll.min.js" th:src="@{/style/js/jquery.infinitescroll.min.js}"></script>  
+<script src="style/js/jquery.easytabs.min.js" th:src="@{/style/js/jquery.easytabs.min.js}"></script> 
+<script src="style/js/owl.carousel.min.js" th:src="@{/style/js/owl.carousel.min.js}"></script> 
+<script src="style/js/jquery.fitvids.js" th:src="@{/style/js/jquery.fitvids.js}"></script>
+<script src="style/js/google-code-prettify/prettify.js" th:src="@{/style/js/google-code-prettify/prettify.js}"></script> 
+<script src="style/js/jquery.slickforms.js" th:src="@{/style/js/jquery.slickforms.js}"></script> 
+<script src="style/js/retina.js" th:src="@{/style/js/retina.js}"></script> 
+<script src="style/js/canvas.js" th:src="@{/style/js/canvas.js}"></script> 
+<script src="style/js/scripts.js" th:src="@{/style/js/scripts.js}"></script>
+
+
+<!-- <script type="text/javascript">
+    $(document).ready(function(){
+        var range = 50;             //距下边界长度/单位px
+        var elemt = 500;           //插入元素高度/单位px
+        var maxnum = 20;            //设置加载最多次数
+        var num = 1;
+        var totalheight = 0; 
+        var main = $("#gamelist");                     //主体元素
+        $(window).scroll(function(){
+            var srollPos = $(window).scrollTop();    //滚动条距顶部距离(页面超出窗口的高度)
+            
+            //console.log("滚动条到顶部的垂直高度: "+$(document).scrollTop());
+            //console.log("页面的文档高度 ："+$(document).height());
+            //console.log('浏览器的高度：'+$(window).height());
+            
+            totalheight = parseFloat($(window).height()) + parseFloat(srollPos);
+            if(($(document).height()-range) <= totalheight  && num != maxnum) {
+              var $items = getItemElement();
+                main.append($items).isotope( 'appended', $items);num++;
+            }
+        });
+        function getItemElement() {
+            var $item = $('<li class="item thumb photography"><figure><a href="portfolio-post2.html"><div class="text-overlay"><div class="info">Cover Disk Mockup</div></div><img src="style/images/art/p6.jpg" alt="" /> </a></figure><div class="image-caption text-center"><h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4><div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div><p>游戏简介</p></div></li>');
+            // add width and height class
+           return $item;
+          }
+    });
+    </script> -->
+    <style type="text/css">
+      #infscr-loading {
+        position: fixed;
+        text-align: center;
+        bottom: 30px;
+        left: 47%;
+        z-index: 100;
+        background: white;
+        background: hsla( 0, 0%, 100%, 0.9 );
+        padding: 20px;
+        color: #222;
+        font-size: 15px;
+        font-weight: bold;
+        -webkit-border-radius: 10px;
+           -moz-border-radius: 10px;
+                border-radius: 10px;
+      }
+    </style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+           
+
+            $('#gamelist').infinitescroll({
+                navSelector: "#navi", //导航的选择器，会被隐藏
+                nextSelector: "#navi a", //包含下一页链接的选择器
+                itemSelector: ".item.thumb", //你将要取回的选项(内容块)
+                debug: true, //启用调试信息
+                animate: false, //当有新数据加载进来的时候，页面是否有动画效果，默认没有
+                extraScrollPx: 10, //滚动条距离底部多少像素的时候开始加载，默认150
+                bufferPx: 40, //载入信息的显示时间，时间越大，载入信息显示时间越短
+                pixelsFromNavToBottom: 20,
+                errorCallback: function() {
+                    alert('error');
+                }, //当出错的时候，比如404页面的时候执行的函数
+                localMode: true, //是否允许载入具有相同函数的页面，默认为false
+                dataType: 'json',//可以是json
+                template: function(data) {
+                	console.log(data);
+                	//data表示服务端返回的json格式数据，这里需要把data转换成瀑布流块的html格式，然后返回给回到函数
+                	var content = '';
+                	content += ' <li class="item thumb graphic" > '
+                		+ ' <figure><a href="portfolio-post.html">'
+                		+ ' <img  style="height:207.266px" th:src="@{/style/images/art/p1.jpg}" alt="" /></a></figure>'
+                		+ ' <div class="image-caption text-center">'
+                		+ ' <h4 class="post-title upper"><a href="portfolio-post.html">' + data.id + '</a></h4>'
+                		+ ' <div class="meta"> <span class="categories"><a href="#">' + data.loginName + '</a>, <a href="#">'+ data.loginName + '</a></span> </div>'
+                		+ ' <p>' + data.niceName + '</p>'
+                		+ ' </div>'
+                	 + ' </li> ';
+                	return content;
+                	
+                	
+               },
+                loading: {
+                    msgText: "加载中...",
+                    finishedMsg: '没有新数据了...',
+                    img: 'http://i.imgur.com/qkKy8.gif',
+                    //selector: '.loading' // 显示loading信息的div
+                }
+            }, function(newElems) {
+                //程序执行完的回调函数
+                var $newElems = $(newElems);
+                //$('.wrapper:eq(1)').masonry('appended', $newElems);
+                $("#gamelist").append($newElems).isotope( 'appended', $newElems);
+            });
+
+        });
+    </script>
+</body>
+</html>
