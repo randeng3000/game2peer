@@ -173,8 +173,8 @@
         <p class="lead lite"><a href="contact.html">快去选择你喜爱的游戏，与小伙伴一起分享吧</a></p>
         <p th:text="${__userInfo.loginName}">1122</p>
         
-        <a th:id="${__userInfo.loginName}" tabindex="0" class="btn btn-lg btn-danger" role="button" data-content="${__userInfo.loginName}" data-toggle="popover">弹出框2</a>
-		
+        <a th:id="${__userInfo.loginName}" tabindex="0" class="btn btn-lg btn-danger" role="button"  data-toggle="popover">弹出框2</a>
+		<a id="222" tabindex="0" class="btn btn-lg btn-danger" role="button"  data-toggle="popover">弹出框2</a>
       </div>
     </div>
   </div>
@@ -198,7 +198,7 @@
 <script src="style/js/scripts.js" th:src="@{/style/js/scripts.js}"></script>
 <!-- 需要添加的脚本  -->
 <script th:fragment="javascript" src="style/js/test.js" th:src="@{/style/js/test.js}"></script>
-<script th:fragment="javascript">
+<script th:fragment="javascript" type="text/javascript">
 /* $(function () { 
 	$("[data-toggle='popover']").popover();
 }); */
@@ -218,7 +218,8 @@ $(function () {
 	});
 });
 function ContentMethod(txt) {
-	return '<table th:id="'xxx' + ${__userInfo.loginName}" class="table table-bordered"><tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>' +
+	console.log(txt);
+	return '<p style="font-size: 20px;">' + txt + '</p>' +
 			'<tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>' +
 			'<tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>'+
 			'<tr><td>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</td><td>BB</td><td>CC</td><td>DD</td></tr></table>';
