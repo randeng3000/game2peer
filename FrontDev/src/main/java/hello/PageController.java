@@ -66,6 +66,33 @@ public class PageController {
 		return "gamelist";
 	}
 	
+	@RequestMapping("/pages/detail/{id:.+}")
+	public String requestPages3(HttpServletRequest request,	HttpServletResponse response, @PathVariable String id, Model model) throws Exception
+	{
+		//环境属性
+		//匿名用户
+		User user = null;
+		
+		user = new User();
+		user.setLoginName("test");
+		user.setGroupId(2);
+		model.addAttribute("__userInfo", user);
+		
+		AccessRight ac = new AccessRight();
+		ac.setDel(1);
+		ac.setGet(1);
+		ac.setModi(1);
+		ac.setPut(1);
+		model.addAttribute("__accessRight", ac);
+		
+		model.addAttribute("__content_page", "detail");
+
+		//页面特殊属性
+		model.addAttribute("pageObject", "test");
+		
+		return "layout/t1";
+	}
+	
 	@RestController
 	@RequestMapping("/demo")
 	public class DemoController {

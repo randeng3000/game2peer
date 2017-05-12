@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <title th:text="#{欢迎注册}">欢迎注册</title>
+    
+    <!-- Bootstrap -->
+    <link href="../static/style/css/bootstrap.css" th:href="@{/style/css/bootstrap.css}" rel="stylesheet"/>
+    <link href="../static/style/css/login.css" th:href="@{/style/css/login.css}" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+	  .error{
+		  color:red;
+	}
+	</style>
+  </head>
+  <body >
+
+   <div class="container">
+
+      <div class="row">
+
+        <!-- <div style="padding-left:0;padding-right:0;" class="col-sm-8">
+           <img style="width:100%;" src="../static/style/images/art/p9-full.jpg" th:src="@{/style/images/art/p9-full.jpg}"/>
+        </div> -->
+        <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 form-top-center">
+          <a href="/">
+             <img src="../static/style/images/logo@2x.png" th:src="@{/style/images/logo@2x.png}" alt="" style="width: 87px;" />
+          </a>
+        </div>
+
+        <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 form-box reg">
+          <div class="form-top">
+            <div class="form-top-left">
+              <h2 th:text="#{欢迎注册}">创建账户</h2>
+            </div>
+          </div>
+          <div class="form-bottom reg">
+            <form role="form" th:action="@{/register}" method="post" class="login-form">
+              <div class="alert alert-warning" role="alert" th:if="${msg}" th:text="${msg}">
+		                          注册失败     
+		      </div>
+              <div class="form-group">
+                <label for="form-email" th:text="#{电子邮箱地址}">电子邮箱地址</label>
+                <input type="email" name="username"  class="form-email form-control" id="form-email" th:placeholder="#{有效邮箱地址}" required="true"/>
+                <div class="a-row" th:text="#{注册后，我们将发送激活链接到您的邮箱。}">注册后，我们将发送激活链接到您的邮箱。</div>
+              </div>
+              <div class="form-group">
+               <label for="form-nicename" th:text="#{您的昵称}">您的昵称</label>
+                <input type="text" name="nicename"  class="form-username form-control" id="form-nicename"/>
+              </div>
+              <div class="form-group">
+                <label for="form-password" th:text="#{密码}">密码</label>
+                <input type="password" name="password"  class="form-password form-control" id="form-password" th:placeholder="#{至少6个字符}" minlength="6" required="true"/>
+              </div>
+              <div class="a-checkbox">
+                 <label><input type="checkbox" name="readit" value="true" required="true"/>                 
+                   <span class="a-label a-checkbox-label" th:inline="text">[[#{我已阅读并同意网站的}]]<a href="">[[#{使用条件}]]</a>及<a href="">[[#{隐私声明}]]</a></span>
+                 </label>
+              </div>
+              <div class="form-group"> <button type="submit" class="btn btn-warning btn-block" th:text="#{注册}">注册</button></div>
+             </form>
+            <div>
+             <div class="a-divider a-divider-break"></div>
+             <div id="legalTextRow" class="a-row a-spacing-top-medium a-size-small" th:inline="text">[[#{已拥有账户?}]]<a th:href="@{/login}">[[#{登录}]]</a>
+             </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 col-sm-12 col-xs-12 a-section a-spacing-top-extra-large" style="margin-top: 26px;">
+          <div class="a-divider a-divider-section"><div class="a-divider-inner"></div></div>
+          <div class="a-section a-spacing-small a-text-center a-size-mini">
+            <span class="auth-footer-seperator"></span>
+              <a class="a-link-normal" target="_blank" href="" th:text="#{使用条件}">使用条件 </a>
+              <span class="auth-footer-seperator"></span>
+              <a class="a-link-normal" target="_blank" href="" th:text="#{隐私声明}">隐私声明</a>
+              <span class="auth-footer-seperator"></span>
+              <a class="a-link-normal" target="_blank" href="" th:text="#{帮助}">帮助</a>
+              <span class="auth-footer-seperator"></span>
+          </div>
+          <div class="a-section a-spacing-none a-text-center">
+            <span class="a-size-mini a-color-secondary" th:text="#{版权所有}">版权所有 © 1996-2017，西安理工大学</span>
+          </div>
+        </div>
+      </div><!--/row-->
+    </div><!--/.container-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="../static/style/js/jquery.min.js" th:src="@{/style/js/jquery.min.js}"></script>
+    <script src="../static/style/js/jquery-validation-1.14.0/jquery.validate.js" th:src="@{/style/js/jquery-validation-1.14.0/jquery.validate.js}"></script>
+	<script src="../static/style/js/jquery-validation-1.14.0/localization/messages_zh.js" th:src="@{/style/js/jquery-validation-1.14.0/localization/messages_zh.js}"></script>
+    <script>
+		$().ready(function() {
+		    $(".login-form").validate();
+		});
+	</script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/style/js/bootstrap.min.js" th:src="@{/style/js/bootstrap.min.js}"></script>
+  </body>
+</html>

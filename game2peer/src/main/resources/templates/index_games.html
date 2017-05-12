@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link th:fragment="css" th:href="@{/style/type/csicon.css}" rel="stylesheet"/>
+    <style th:fragment="css" type="text/css">
+      #infscr-loading {
+        position: fixed;
+        text-align: center;
+        bottom: 30px;
+        left: 47%;
+        z-index: 100;
+        background: white;
+        background: hsla( 0, 0%, 100%, 0.9 );
+        padding: 20px;
+        color: #222;
+        font-size: 15px;
+        font-weight: bold;
+        -webkit-border-radius: 10px;
+           -moz-border-radius: 10px;
+                border-radius: 10px;
+      }
+
+       
+       .icon-heart-1:before {
+		font-size: 20px;
+		color:red; 
+       }
+       .icon-heart-empty-1:before {
+		font-size: 20px;
+		 
+       }
+    </style>
+</head>
+<body>
+
+<div th:fragment="content">
+  
+  <div class="light-wrapper">
+    <div class="container inner">
+      <div class="container inner bp50">
+        <h1 th:text="#{平台欢迎语}">Hello</h1>
+        <p class="lead" th:text="#{平台目标}">Our Policy</p>
+        <a style="font-family: anchorjs-icons; font-style: normal; font-variant: normal; font-weight: normal; line-height: inherit; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>
+      </div>
+      <div class="owl-team owlcarousel carousel-th" data-autoplay="3000">
+        <div class="item" th:each="game:${games}">
+          <figure><img src="/assets/images/1.jpg" width="440" height="290" th:src="${game.coverImage}" alt="" /></figure>
+          <div class="image-caption text-center">
+            <h3 class="post-title upper" th:text="${game.gameName}">产品名称</h3>
+            <div class="meta">Sales Manager</div>
+            <p th:text="${game.summary}">产品内容简介</p>
+            <p><i class="icon-heart-empty-1"></i></p>
+            <div th:switch="#{Locale}">
+               <div th:case="'cn'">
+		            <ul class="social" th:if="${__userInfo}">
+		              <li><a th:id="${game.id}" tabindex="0" role="button" data-toggle="popover" th:attr="data-game-name=${game.gameName}" ><i class="csicon-rweichat"></i></a></li>
+		              <li><a href="#"><i class="csicon-rqq"></i></a></li>
+		              <li><a href="#"><i class="csicon-rqzone"></i></a></li>
+		              <li><a href="#" class="linkcopy" data-clipboard-text="123456"  aria-label="复制成功！"><i class="budicon-link-external"></i></a></li>
+		            </ul>
+               </div>
+            </div>
+           <a th:unless="${__userInfo}" class="btn btn-lg btn-primary" href="/login" th:text="#{马上开始赚钱}">马上开始赚钱</a>
+          </div>
+        </div>
+        <!-- /.item --> 
+      </div>
+      <!-- /.owlcarousel -->
+      <div class="portfolio fix-portfolio"> 
+      <ul class="items col4" id="gamelist">
+         <li class="item thumb graphic">
+            <figure><a href="portfolio-post.html">
+              <div class="text-overlay">
+                <div class="info">Stationary Branding Mockup</div>
+              </div>
+              <img src="style/images/art/p1.jpg"  th:src="@{/style/images/art/p1.jpg}" alt="" /></a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb graphic">
+            <figure><a href="portfolio-post2.html">
+              <div class="text-overlay">
+                <div class="info">Business Card Mockup</div>
+              </div>
+              <img src="style/images/art/p2.jpg"  th:src="@{/style/images/art/p2.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb video">
+            <figure><a href="portfolio-post3.html">
+              <div class="text-overlay">
+                <div class="info">Bi-fold Mockup</div>
+              </div>
+              <img src="style/images/art/p3.jpg"  th:src="@{/style/images/art/p3.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb web">
+            <figure><a href="portfolio-post4.html">
+              <div class="text-overlay">
+                <div class="info">Infographic Elements</div>
+              </div>
+              <img src="style/images/art/p4.jpg"  th:src="@{/style/images/art/p4.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb web">
+            <figure><a href="portfolio-post.html">
+              <div class="text-overlay">
+                <div class="info">Business Cards</div>
+              </div>
+              <img src="style/images/art/p5.jpg"  th:src="@{/style/images/art/p5.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb photography">
+            <figure><a href="portfolio-post2.html">
+              <div class="text-overlay">
+                <div class="info">Cover Disk Mockup</div>
+              </div>
+              <img src="style/images/art/p6.jpg"  th:src="@{/style/images/art/p6.jpg}" alt="" /> </a></figure>
+              <div class="image-caption text-center">
+                <h4 class="post-title upper"><a href="portfolio-post.html">游戏名称</a></h4>
+                <div class="meta"> <span class="categories"><a href="#">游戏简介</a>, <a href="#">游戏简介</a></span> </div>
+                <p>游戏简介</p>
+              </div>
+          </li>
+          <li class="item thumb graphic">
+            <figure><a href="portfolio-post3.html">
+              <div class="text-overlay">
+                <div class="info">Business Cards</div>
+              </div>
+              <img src="style/images/art/p7.jpg"  th:src="@{/style/images/art/p7.jpg}" alt="" /> </a></figure>
+          </li>
+          <li class="item thumb graphic">
+            <figure><a href="portfolio-post4.html">
+              <div class="text-overlay">
+                <div class="info">Phortio iPhone App</div>
+              </div>
+              <img src="style/images/art/p8.jpg"  th:src="@{/style/images/art/p8.jpg}" alt="" /> </a></figure>
+          </li>
+      </ul>
+      </div>
+      <!-- 游戏列表api --> 
+      
+      
+    </div>
+  </div>
+</div>  
+
+<script th:fragment="javascript" th:inline="javascript">
+
+
+$(function () {
+	
+	var clipboard = new Clipboard('.linkcopy');
+	
+	clipboard.on('success', function(e) { 
+	    var msg = e.trigger.getAttribute('aria-label'); 
+	    layer.msg(msg,{
+			time: 1000, //1s后自动关闭
+		});
+	 	e.clearSelection(); 
+	}); 
+
+	
+	$(".icon-heart-empty-1").click(function () {
+		//$(".zan").removeClass("zan1");
+		$(this).toggleClass("icon-heart-1");
+	});
+	
+	$('[data-toggle="popover"]').each(function () {
+		var element = $(this);
+		var id = element.attr('id');
+		element.popover({
+			trigger: 'click',
+			placement: 'top', //top, bottom, left or right
+			title: element.attr('data-game-name'),
+			container: '#'+id,
+			html: 'true',
+			content: ContentMethod(id),
+		});
+	});
+    
+    $('#gamelist').infinitescroll({
+       navSelector: "#navi", //导航的选择器，会被隐藏
+       nextSelector: "#navi a", //包含下一页链接的选择器
+       itemSelector: ".item.thumb", //你将要取回的选项(内容块)
+       debug: true, //启用调试信息
+       animate: false, //当有新数据加载进来的时候，页面是否有动画效果，默认没有
+       extraScrollPx: 10, //滚动条距离底部多少像素的时候开始加载，默认150
+       bufferPx: 40, //载入信息的显示时间，时间越大，载入信息显示时间越短
+       pixelsFromNavToBottom: 200,
+       errorCallback: function() {
+           alert('error');
+       }, //当出错的时候，比如404页面的时候执行的函数
+       localMode: true, //是否允许载入具有相同函数的页面，默认为false
+       dataType: 'json',//可以是json
+       template: function(data) {
+       	console.log(data);
+       	//data表示服务端返回的json格式数据，这里需要把data转换成瀑布流块的html格式，然后返回给回到函数
+       	var content = '';
+       	content += ' <li class="item thumb graphic" > '
+       		+ ' <figure><a href="portfolio-post.html">'
+       		+ ' <img  style="height:207.266px" th:src="@{/style/images/art/p1.jpg}" alt="" /></a></figure>'
+       		+ ' <div class="image-caption text-center">'
+       		+ ' <h4 class="post-title upper"><a href="portfolio-post.html">' + data.id + '</a></h4>'
+       		+ ' <div class="meta"> <span class="categories"><a href="#">' + data.loginName + '</a>, <a href="#">'+ data.loginName + '</a></span> </div>'
+       		+ ' <p>' + data.niceName + '</p>'
+       		+ ' </div>'
+       	 + ' </li> ';
+       	return content;
+      },
+       loading: {
+           msgText: "加载中...",
+           finishedMsg: '没有新数据了...',
+           img: '/style/images/rotationing.gif',
+           //selector: '.loading' // 显示loading信息的div
+       }
+   }, function(newElems) {
+       //程序执行完的回调函数
+       var $newElems = $(newElems);
+       //$('.wrapper:eq(1)').masonry('appended', $newElems);
+       $("#gamelist").append($newElems).isotope( 'appended', $newElems);
+   });
+});
+function ContentMethod(id) {
+	var t = [[(#{扫码二维码分享至好友和朋友圈})]]
+	return '<img style="height: 200px;weight: 200px;" src="/gameshare/QR/' + id+ '.png"/>' +
+	  	   '<p style="text-align: center;font-size: 12px;">' + t + '</p>';
+
+}
+</script>
+
+<script th:fragment="javascript" src="style/js/jquery.infinitescroll.min.js" th:src="@{/style/js/jquery.infinitescroll.min.js}"></script>  
+<script th:fragment="javascript" src="style/js/clipboard.js" th:src="@{/style/js/clipboard.js}"></script>
+<script th:fragment="javascript" src="style/js/layer/layer.js" th:src="@{/style/js/layer/layer.js}"></script>
+</body>
+</html>
