@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+</head>
+<body>
+    <div class="container" th:fragment="content">
+       <div th:each="item:${apps}">
+         <a th:href="${item.link}" th:text="${item.appsName}"></a>
+       </div>
+    </div>
+</body>
+</html>
