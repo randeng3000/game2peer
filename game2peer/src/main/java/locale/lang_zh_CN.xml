@@ -23,5 +23,6 @@
     <entry key="注册邮件标题">Hi，你的注册激活链接来了</entry>
     <entry key="注册邮件内容">{0},点击您的链接{1}激活账户，马上开始赚钱！</entry>
     <!--g_register_1-->
-    <entry key="邀你一起来玩">邀你一起来玩</entry>
+    <entry key="邀你一起来玩">邀你一起来玩</entry>   
+     
 </properties>  

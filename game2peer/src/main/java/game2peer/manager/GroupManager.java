@@ -34,7 +34,7 @@ public class GroupManager {
 	private GroupUrlMapper groupUrlMapper;
 	
 	
-	@Cacheable("groups")
+	//@Cacheable("groups")
 	public Collection<? extends GrantedAuthority> getAuthorities(Integer groupId)
 	{
 		List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
@@ -46,7 +46,7 @@ public class GroupManager {
 		return authList;
 	}
 	
-	@Cacheable("groupMap")
+	//@Cacheable("groupMap")
 	public Map<String, AccessRight> getGroupAccessRight(String groupId)
 	{
 		GroupUrlExample e = new GroupUrlExample();
@@ -70,7 +70,7 @@ public class GroupManager {
 		return groupMap;
 	}
 	
-	@Cacheable("groupAccessUrl")
+	//@Cacheable("groupAccessUrl")
 	public Object[] getGroupAccessUrl(String groupId)
 	{
 		Map<String, AccessRight> m = getGroupAccessRight(groupId); 

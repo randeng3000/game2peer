@@ -45,8 +45,8 @@
           <ul class="nav navbar-nav">
            <!-- new -->
             <li><a href="/" th:text="#{首页}">Home</a></li>
-            <li class="dropdown" th:each="item:${__nav}">
-               <a href="#" th:href="${#strings.isEmpty(item.url) ? '#':item.url}" class="dropdown-toggle js-activated"><span th:text="${item.name}">Home</span></a>
+            <li th:class="${#strings.isEmpty(item.url) ? 'dropdown':';'}" th:each="item:${__nav}">
+               <a href="#" th:href="${#strings.isEmpty(item.url) ? '#':item.url}" th:class="${#strings.isEmpty(item.url) ? 'dropdown-toggle js-activated':';'}"><span th:text="${item.name}">Home</span></a>
                <ul class="dropdown-menu" th:if="${item.subNav.size() > 0}">
                    <li th:each="sub:${item.subNav}"><a href="portfolio.html" th:href="${sub.url}" th:text="${sub.name}">Fullsreen Grid</a></li>
                </ul>

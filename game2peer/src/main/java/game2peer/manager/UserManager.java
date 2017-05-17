@@ -13,6 +13,7 @@ import game2peer.mvc.bean.UserRegister;
 import game2peer.mybatis.dao.BusiUserGalleryMapper;
 import game2peer.mybatis.dao.UserMapper;
 import game2peer.mybatis.domain.BusiUserGallery;
+import game2peer.mybatis.domain.BusiUserGalleryExample;
 import game2peer.mybatis.domain.User;
 import game2peer.mybatis.domain.UserExample;
 import game2peer.utility.MD5;
@@ -117,8 +118,21 @@ public class UserManager {
 		return MD5.getMD5String(userId + key);
 	}
 	
-	public void saveImageFileInfo(BusiUserGallery o)
+	public void saveImage(BusiUserGallery o)
 	{
 		this.busiUserGalleryMapper.insert(o);
+	}
+	
+	public List<BusiUserGallery> getImages(String userId, int kind, int page)
+	{
+		BusiUserGalleryExample example = new BusiUserGalleryExample();
+		if (kind == 1)
+		  example.setOrderByClause("file_info desc");
+		else
+		  example.setOrderByClause("create_time desc");
+		example.setLimitStart(page*20);
+		example.setLimitEnd(20);
+		example.createCriteria().andUserIdEqualTo(userId);
+		return this.busiUserGalleryMapper.selectByExample(example);
 	}
 }

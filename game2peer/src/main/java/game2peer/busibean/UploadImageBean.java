@@ -58,7 +58,7 @@ public class UploadImageBean implements PageBean {
 		g.setCreateTime(new Date());
 		g.setFilePath(url + f.getName());
 		g.setFileInfo(p.getOriginalFilename());
-		this.userManager.saveImageFileInfo(g);
+		this.userManager.saveImage(g);
         model.addAttribute("games", null);
 	}
 

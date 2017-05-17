@@ -53,7 +53,7 @@ public class UploadImageFileProcessor implements ApiBean {
 		g.setCreateTime(new Date());
 		g.setFilePath(url + f.getName());
 		g.setFileInfo(f.getName());
-		this.userManager.saveImageFileInfo(g);
+		this.userManager.saveImage(g);
 		b.setError(null);
 		b.setImgUrl(g.getFilePath());
 		return b;

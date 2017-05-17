@@ -54,6 +54,7 @@ public class GameShareController {
 				String un = userDetails.getUsername();
 				User user = this.userManager.getUser(un);
 				buffer.append(user.getId());
+				
 				ServletOutputStream stream = null;
 				try {
 					stream = response.getOutputStream();
@@ -62,6 +63,15 @@ public class GameShareController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+			}
+		}
+		else
+		{
+			try {
+				response.sendRedirect("/assets/images/qr_error.jpg");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
