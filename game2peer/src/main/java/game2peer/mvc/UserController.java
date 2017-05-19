@@ -9,10 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import game2peer.manager.GameManager;
 import game2peer.manager.GlobalValueManager;
@@ -98,4 +101,17 @@ public class UserController {
 				return "forward:/register";
 		}
 	 }
+	 
+	@RequestMapping(value="/isLogin")
+	@ResponseBody
+	public String isLogin(HttpServletRequest request, HttpServletResponse response)
+	{
+		Object p = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (p instanceof UserDetails) {
+			UserDetails userDetails = (UserDetails) p;
+			String un = userDetails.getUsername();
+			return un;
+		}
+		return null;
+	}
 }

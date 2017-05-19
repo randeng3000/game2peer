@@ -10,8 +10,14 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import game2peer.mvc.bean.UserRegister;
+import game2peer.mybatis.dao.BusiUserAccountDetailsMapper;
+import game2peer.mybatis.dao.BusiUserAccountMapper;
 import game2peer.mybatis.dao.BusiUserGalleryMapper;
 import game2peer.mybatis.dao.UserMapper;
+import game2peer.mybatis.domain.BusiUserAccount;
+import game2peer.mybatis.domain.BusiUserAccountDetails;
+import game2peer.mybatis.domain.BusiUserAccountDetailsExample;
+import game2peer.mybatis.domain.BusiUserAccountExample;
 import game2peer.mybatis.domain.BusiUserGallery;
 import game2peer.mybatis.domain.BusiUserGalleryExample;
 import game2peer.mybatis.domain.User;
@@ -33,6 +39,26 @@ public class UserManager {
 	@Autowired
 	private BusiUserGalleryMapper busiUserGalleryMapper;
 
+	@Autowired
+	private	BusiUserAccountMapper busiUserAccountMapper;
+	
+	@Autowired
+	private	BusiUserAccountDetailsMapper busiUserAccountDetailsMapper;
+
+	public List<BusiUserAccountDetails> getAccountDetails(User user, String gameId)
+	{
+		BusiUserAccountDetailsExample ex = new BusiUserAccountDetailsExample();
+		ex.createCriteria().andUserIdEqualTo(user.getId());
+		return this.busiUserAccountDetailsMapper.selectByExample(ex);
+	}
+	
+	public List<BusiUserAccount> getAccount(User user)
+	{
+		BusiUserAccountExample ex = new BusiUserAccountExample();
+		ex.createCriteria().andUserIdEqualTo(user.getId());
+		return this.busiUserAccountMapper.selectByExample(ex);
+	}
+	
 	public User getUser(String loginName)
 	{
 		return this.getUserLowerCase(loginName.toLowerCase());

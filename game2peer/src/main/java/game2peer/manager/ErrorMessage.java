@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 public class ErrorMessage {
 
 	final public static int ERROR_PAGE_NOT_FOUND = 10001;
+	final public static String LOGIN_FIRST = "请先登录平台！";
+	final public static String CHOOSE_ONE_GAME = "请选择一个游戏！";
 	
 	private Map<Integer, String> messgage = new HashMap<Integer, String>(); 
 	

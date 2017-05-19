@@ -83,7 +83,8 @@ public class PagesController extends ApplicationObjectSupport{
 			   else
 				   navList = navManager.getNavObject(GroupManager.AnonymousGroup);
 			   model.addAttribute("__nav", navList);
-			   
+
+			   model.addAttribute("__title", page.getTitle());
 			   model.addAttribute("__content_page", page.getContentPage());
 
 			   if (!StringUtility.hasEmpty(page.getBean()))

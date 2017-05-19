@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+<link th:fragment="css" rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/style/jqgrid/css/ui.jqgrid-bootstrap.css}" />
+</head>
+<body>
+	<div th:fragment="content">
+		<div class="offset"></div>
+		<div class="light-wrapper">
+			<div class="container inner">
+			    <div class="alert alert-warning" th:if="${errorMessage}">
+			        <p th:text="#{${errorMessage}}"></p>
+			    </div>
+			    <ul class="items col4 isotope" style="position: relative; overflow: hidden; height: 868px;">
+		          <li th:each="account:${userAccount}" class="item thumb graphic isotope-item" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(0px, 0px);">
+                    <p><span>游戏</span><span th:text="${@gameManager.getGameAdpater(account.gameId).game.gameName}"></span></p> 
+                    <p><span>总收入</span><span th:text="${account.incomeConfirmed + account.incomeNotConfirmed}"></span></p>
+                    <p><span>可提现收入</span><span th:text="${account.incomeConfirmed}"></span></p>
+                    <a th:href="@{/pages/g/userAccountDetails.shtml(gameId=${account.gameId})}">明细流水</a>
+		          </li>
+		        </ul>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

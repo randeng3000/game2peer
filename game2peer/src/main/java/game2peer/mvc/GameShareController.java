@@ -39,26 +39,15 @@ public class GameShareController {
 	public void shareQR(HttpServletRequest request, HttpServletResponse response, @PathVariable String gamecode) {
 		Object p = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		if (p instanceof UserDetails) {
-			StringBuffer buffer = new StringBuffer();
 			BusiGame game = this.gameManager.getGameById(gamecode);
 			if (game != null) {
-                String domain = game.getRegisterWithDomain();
-                if (StringUtility.hasEmpty(domain))
-                	domain = globalValueManager.getValue("global.prefix");
-                
-				buffer.append(domain);
-				buffer.append("/games/");
-				buffer.append(gamecode);
-				buffer.append("/");
 				UserDetails userDetails = (UserDetails) p;
 				String un = userDetails.getUsername();
 				User user = this.userManager.getUser(un);
-				buffer.append(user.getId());
-				
 				ServletOutputStream stream = null;
 				try {
 					stream = response.getOutputStream();
-					qrManager.writeToStream(buffer.toString(), stream);
+					qrManager.writeToStream(this.gameManager.getGameShareLink(game, user.getId()), stream);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

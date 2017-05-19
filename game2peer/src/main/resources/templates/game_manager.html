@@ -4,94 +4,94 @@
 <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
 <link th:fragment="css" rel="stylesheet" type="text/css" media="screen"
 	th:href="@{/style/jqgrid/css/ui.jqgrid-bootstrap.css}" />
+<style th:fragment="css" type="text/css">
+.gmli {
+	border: 1px solid #1abb9c;
+	border-radius: 3px;
+/* 	margin-bottom: 10px;
+	margin-left: 5px;
+	display: inline-block; */
+}
+
+}
+</style>
 </head>
 <body>
 	<div th:fragment="content">
 		<div class="offset"></div>
 		<div class="light-wrapper">
 			<div class="container inner">
-				<div class="section-title-wrapper">
-				    <img id="img1"></img>
-				    <iframe>
-				    <div>
-					   <input id="imgfile" name="imgfile" type="file" accept="image/png,image/gif"/>
-					   <button id="uploadbutton" type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
-					</div>
-				    </iframe>
-				</div>
-				<div style="margin-left: 20px">
-					<table id="jqGrid"></table>
-					<div id="jqGridPager"></div>
-				</div>
+			    <div class="alert alert-warning" th:if="${errorMessage}">
+			        <p th:text="#{${errorMessage}}"></p>
+			    </div>
+				<div>
+				   <a class="btn btn-default" th:href="@{/pages/g/setGameInfo.shtml}" th:text="#{添加游戏}"></a>
+				</div>   
+				<ul class="items col4 isotope" style="position: relative; overflow: hidden; height: 868px;">
+		          <li th:each="gameAdpater:${games}" class="item thumb graphic isotope-item gmli" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(0px, 0px);">
+		            <figure>
+		              <img th:src="${gameAdpater.game.CoverImage}" alt=""></img>
+		              <div style="padding: 10px 18px 0px;">
+			              <span  style="padding-bottom: 10px;display: block;font-size: 20px;text-align: center;" th:text="${gameAdpater.game.gameName}"></span>
+				          <p style="font-size:16px">
+				          <span style="vertical-align: middle;">创建日期:</span> <span style="vertical-align: middle;" th:text="${{gameAdpater.game.createDate}}"></span>
+				          <a style="margin:0px;padding: 3px 5px;" class="btn btn-red pull-right" th:href="@{/pages/g/setGameInfo.shtml(id=${gameAdpater.game.id})}" th:text="#{编辑}"></a>
+				          </p>
+			          </div>
+		              <ul style="list-style-type: none;">
+		                 <li th:each="gameShares:${gameAdpater.shares}">
+		                    <a th:href="@{/pages/g/setGameShareInfo.shtml(id=${gameShares.id})}" th:text="#{编辑}">
+		                       <p><span th:text="#{说明}"></span><span th:text="${gameShares.description}"/></p>
+		                    </a>   
+		                    <p><span th:text="#{分成比例}"></span><span th:text="${gameShares.share}"/></p>
+		                    <p><span th:text="#{分成模式}"></span><span th:text="${gameShares.shareType}"/></p> 
+		                 </li>
+		                 <li>
+		                    <p><span>说明:</span><span>第一个月促销</span></p>
+		                    <p><span>分成比例:</span><span>0.09</span></p>
+		                    <p><span>分成模式:</span><span>促销</span></p> 
+		                 </li>
+		                 <li>
+		                    <div>
+				              <a style="padding: 3px 5px;" class="btn btn-red" th:href="@{/pages/g/setGameShareInfo.shtml}" th:text="#{添加分成设置}"></a>
+				            </div>
+		                 </li>
+		              </ul>
+		              <hr style="border: none;border-bottom: 1px solid #e1e1e1;padding:0px;margin:0px 10px 5px"/>
+		              <ul style="list-style-type: none;">
+		                 <li th:each="gameDownloads:${gameAdpater.downloads}">
+		                    <a th:href="@{/pages/g/setGameDownloadInfo.shtml(gameId=${gameDownloads.gameId, appType=${gameDownloads.appType}})}" th:text="#{编辑}">
+		                       <p><span th:text="#{说明}"></span><span th:text="#{appType+${gameDownloads.appType}}"/></p>
+		                    </a>   
+		                    <p><span th:text="#{分成比例}"></span><span th:text="${gameDownloads.link}"/></p>
+		                 </li>
+		                 <li>
+		                 	<p><span>说明:</span><span>安卓版</span></p>
+		                    <a href="#">
+		                       <p><span>下载地址:</span><span>酷安网</span></p>
+		                    </a>
+		                 </li>
+		                 <li>
+		                    <div>
+				              <a style="padding: 3px 5px;" class="btn btn-red" th:href="@{/pages/g/setGameDownloadInfo.shtml}" th:text="#{添加下载设置}"></a>
+				            </div>
+		                 </li>
+		              </ul>
+				      
+		            </figure>
+		          </li>
+		        </ul>
 			</div>
 		</div>
 	</div>
-
-	<script th:fragment="javascript" th:inline="javascript"	type="text/javascript"> 
-        $(document).ready(function () {
-        	
-            $("#uploadbutton").click(function () {
-                    ajaxFileUpload();
-            })
-            
-            function ajaxFileUpload() {
-                $.ajaxFileUpload
-                (
-                    {
-                        url: '/api/uploadimage.json', secureuri: false, //是否需要安全协议，一般设置为false
-                        fileElementId: 'imgfile', //文件上传域的ID
-                        dataType: 'json', //返回值类型 一般设置为json
-                        success: function (data, status)  //服务器成功响应处理函数
-                        {
-                            
-                            if (typeof (data.error) != 'undefined') {
-                                if (data.error != '') {
-                                    alert(data.error);
-                                } else {
-                                    alert(data.msg);
-                                }
-                            }
-                            else
-                            {
-                            	$("#img1").attr("src", data.imgurl);
-                            }	
-                        },
-                        error: function (data, status, e)//服务器响应失败处理函数
-                        {
-                            alert(e);
-                        }
-                    }
-                )
-                return false;
-            }
-
-        	
-        	$("#jqGrid").jqGrid({
-                url: [[@{/api/mygames.json}]],
-                datatype: "json",
-                colModel: [
-                    { label: 'id', name: 'id', key: true, width: 75 },
-                    { label: 'userId', name: 'userId', width: 150 },
-                    { label: 'gameName', name: 'gameName', width: 150 },
-                    { label: 'summary', name: 'summary', width: 150 }                    
-                ],
-                viewrecords: true, // show the current page, data rang and total records on the toolbar
-                styleUI : 'Bootstrap',
-        		width: 780,
-        		height: 200,
-        		rowNum: 30,
-        		loadonce: true, // this is just for the demo
-        		pager: "#jqGridPager"
-            });
-        });
-    </script>
-    <script th:fragment="javascript" type="text/javascript"
-		th:src="@{|/style/js/ajaxfileupload.js|}"></script>
-	<!-- We support more than 40 localizations -->
-	<script th:fragment="javascript" type="text/javascript"
-		th:src="@{|/style/jqgrid/js/i18n/grid.locale-#{Locale}.js|}"></script>
-	<!-- This is the Javascript file of jqGrid -->
-	<script th:fragment="javascript" type="text/javascript"
-		th:src="@{/style/jqgrid/js/jquery.jqGrid.min.js}"></script>
+<script th:fragment="javascript" th:inline="javascript">
+$(function () {
+	layer.prompt(function(value, index, elem){
+	    alert(value); //得到value
+	    layer.close(index);
+	  });
+});
+</script>
+<script th:fragment="javascript" src="style/js/layer/layer.js" th:src="@{/style/js/layer/layer.js}"></script>
 </body>
 </html>
