@@ -12,6 +12,12 @@
 	margin-left: 5px;
 	display: inline-block; */
 }
+@media (min-width: 768px) {
+  .modal-dialog {
+    width: 600px;
+    margin: 150px auto;
+  }
+}
 
 }
 </style>
@@ -35,7 +41,7 @@
 			              <span  style="padding-bottom: 10px;display: block;font-size: 20px;text-align: center;" th:text="${gameAdpater.game.gameName}"></span>
 				          <p style="font-size:16px">
 				          <span style="vertical-align: middle;">创建日期:</span> <span style="vertical-align: middle;" th:text="${{gameAdpater.game.createDate}}"></span>
-				          <a style="margin:0px;padding: 3px 5px;" class="btn btn-red pull-right" th:href="@{/pages/g/setGameInfo.shtml(id=${gameAdpater.game.id})}" th:text="#{编辑}"></a>
+				          <a style="margin:0px;padding: 3px 5px;" class="btn btn-default pull-right" th:href="@{/pages/g/setGameInfo.shtml(id=${gameAdpater.game.id})}" th:text="#{编辑}"></a>
 				          </p>
 			          </div>
 		              <ul style="list-style-type: none;">
@@ -53,7 +59,7 @@
 		                 </li>
 		                 <li>
 		                    <div>
-				              <a style="padding: 3px 5px;" class="btn btn-red" th:href="@{/pages/g/setGameShareInfo.shtml}" th:text="#{添加分成设置}"></a>
+				              <a style="padding: 3px 5px;" class="btn btn-default" th:href="@{/pages/g/setGameShareInfo.shtml}" data-gameid="12345" data-toggle="modal" data-target="#contact_dialog" th:text="#{添加分成设置}"></a>
 				            </div>
 		                 </li>
 		              </ul>
@@ -73,7 +79,7 @@
 		                 </li>
 		                 <li>
 		                    <div>
-				              <a style="padding: 3px 5px;" class="btn btn-red" th:href="@{/pages/g/setGameDownloadInfo.shtml}" th:text="#{添加下载设置}"></a>
+				              <a style="padding: 3px 5px;" class="btn btn-default" th:href="@{/pages/g/setGameDownloadInfo.shtml}" th:text="#{添加下载设置}"></a>
 				            </div>
 		                 </li>
 		              </ul>
@@ -83,13 +89,67 @@
 		        </ul>
 			</div>
 		</div>
+
+      
+<!-- the div that represents the modal dialog -->
+		<div class="modal fade" id="contact_dialog" role="dialog">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal">&times;</button>
+		                <h4 class="modal-title">添加分成设置</h4>
+		            </div>
+		                <div class="modal-body">
+		                    <form id="contact_form" action="/test" method="POST">
+		                        	说明: <input type="text" name="description"/><br/>
+		                        	分成比例: <input type="text" name="proportion"/><br/>
+		                        	分成模式: <input type="text" name="rule"/><br/>
+		                    </form>
+		                </div>
+		                <div class="modal-footer">
+		                    <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 5px;margin-bottom: 0;">关闭</button>
+		                    <button type="button" class="btn btn-default" id="submitForm">提交</button>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
 	</div>
 <script th:fragment="javascript" th:inline="javascript">
-$(function () {
-	layer.prompt(function(value, index, elem){
-	    alert(value); //得到value
-	    layer.close(index);
-	  });
+$(document).ready(function () {
+	var gameid;
+    $("#contact_form").on("submit", function(e) {
+        var postData = $(this).serializeArray();
+        var formURL = $(this).attr("action")+"?gameid=" + gameid;
+        console.log(gameid);
+        $.ajax({
+            url: formURL,
+            type: "POST",
+            data: postData,
+            success: function(data, textStatus, jqXHR) {
+                $('#contact_dialog .modal-header .modal-title').html("结果");
+                $('#contact_dialog .modal-body').html(data);
+                $("#submitForm").remove();
+            },
+            error: function(jqXHR, status, error) {
+                console.log(status + ": " + error);
+            }
+        });
+        e.preventDefault();
+    });
+      
+    $("#submitForm").on('click', function() {
+        $("#contact_form").submit();
+    });
+    
+    $('#contact_dialog').on('show.bs.modal', function (event) {  
+        var button = $(event.relatedTarget); // 触发事件的按钮  
+        gameid = button.data('gameid'); // 解析出data-whatever内容  
+
+    }); 
+    
+    $('#contact_dialog').on('hidden.bs.modal', function () {
+    	window.location.reload();
+    });
 });
 </script>
 <script th:fragment="javascript" src="style/js/layer/layer.js" th:src="@{/style/js/layer/layer.js}"></script>
