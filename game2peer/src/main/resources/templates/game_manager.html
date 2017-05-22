@@ -56,11 +56,7 @@
 		       
 		                 <li>
 		                    <div>
-<<<<<<< HEAD
-				              <a style="padding: 3px 5px;" class="btn btn-default" th:href="@{/pages/g/setGameShareInfo.shtml}" th:attr="data-addgameshare='1'"  data-toggle="modal" data-target="#gameshare_dialog" th:text="#{添加分成设置}"></a>
-=======
-				              <a style="padding: 3px 5px;" class="btn btn-default" th:href="@{/pages/g/setGameShareInfo.shtml}" data-gameid="12345" data-toggle="modal" data-target="#contact_dialog" th:text="#{添加分成设置}"></a>
->>>>>>> origin/master
+				              <a style="padding: 3px 5px;" class="btn btn-default" href="####" th:attr="data-gameid=${gameAdpater.game.id}"  data-toggle="modal" data-target="#gameshare_dialog" th:text="#{添加分成设置}"></a>
 				            </div>
 		                 </li>
 		              </ul>
@@ -76,11 +72,7 @@
 		                 
 		                 <li>
 		                    <div>
-<<<<<<< HEAD
-				              <a style="padding: 3px 5px;" class="btn btn-default" th:href="@{/pages/g/setGameDownloadInfo.shtml}" th:attr="data-addgamedownload='1'"  data-toggle="modal" data-target="#gamedownload_dialog" th:text="#{添加下载设置}"></a>
-=======
-				              <a style="padding: 3px 5px;" class="btn btn-default" th:href="@{/pages/g/setGameDownloadInfo.shtml}" th:text="#{添加下载设置}"></a>
->>>>>>> origin/master
+				              <a style="padding: 3px 5px;" class="btn btn-default" href="####" th:attr="data-gameid=${gameAdpater.game.id}"  data-toggle="modal" data-target="#gamedownload_dialog" th:text="#{添加下载设置}"></a>
 				            </div>
 		                 </li>
 		              </ul>
@@ -93,16 +85,11 @@
 
       
 <!-- the div that represents the modal dialog -->
-<<<<<<< HEAD
 		<div class="modal fade" id="gameshare_dialog" role="dialog">
-=======
-		<div class="modal fade" id="contact_dialog" role="dialog">
->>>>>>> origin/master
 		    <div class="modal-dialog">
 		        <div class="modal-content">
 		            <div class="modal-header">
 		                <button type="button" class="close" data-dismiss="modal">&times;</button>
-<<<<<<< HEAD
 		                <h4 class="modal-title">分成设置</h4>
 		            </div>
 		                <div class="modal-body">
@@ -110,20 +97,10 @@
 		                        	说明: <input type="text" name="description"/><br/>
 		                        	分成比例: <input type="text" name="share"/><br/>
 		                        	分成模式: <input type="text" name="shareType"/><br/>
-=======
-		                <h4 class="modal-title">添加分成设置</h4>
-		            </div>
-		                <div class="modal-body">
-		                    <form id="contact_form" action="/test" method="POST">
-		                        	说明: <input type="text" name="description"/><br/>
-		                        	分成比例: <input type="text" name="proportion"/><br/>
-		                        	分成模式: <input type="text" name="rule"/><br/>
->>>>>>> origin/master
 		                    </form>
 		                </div>
 		                <div class="modal-footer">
 		                    <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 5px;margin-bottom: 0;">关闭</button>
-<<<<<<< HEAD
 		                    <button type="button" class="btn btn-default" id="gs_submitForm">提交</button>
 		                </div>
 		            </div>
@@ -155,24 +132,22 @@
 $(document).ready(function () {
 	var gameshareid;
 	var gamedownloadid;
-	var addgameshare;
-	var addgamedownload;
+	var gameid;
 	
     $('#gameshare_dialog, #gamedownload_dialog').on('show.bs.modal', function (event) {  
         var button = $(event.relatedTarget); // 触发事件的按钮  
         gameshareid = button.data('gameshareid'); // 解析出data-whatever内容 
         gamedownloadid = button.data('gamedownloadid');
-        addgameshare = button.data('addgameshare');
-        addgamedownload = button.data('addgamedownload');
-        console.log(addgameshare);
-        var gsURL = $("#gameshare_form").attr("action")+"?id=" + gameshareid;
-        var gdURL = $("#gamedownload_form").attr("action")+"?id=" + gamedownloadid;
-        //console.log(gsURL);
+        gameid = button.data('gameid');
+        //console.log(addgameshare);
+        var gsURL = $("#gameshare_form").attr("action")+"?gameshareid=" + gameshareid;
+        var gdURL = $("#gamedownload_form").attr("action")+"?gamedownloadid=" + gamedownloadid;
+        if(gameshareid)console.log(gameshareid);
         if(gameshareid){
 		console.log(gameshareid);
         $.ajax({
             url: gsURL,
-            type: "POST",
+            type: "GET",
             data: "",
             success: function(data, textStatus, jqXHR) {
             	$('#gameshare_dialog .modal-body form input:eq(0)').val(data.description);
@@ -188,7 +163,7 @@ $(document).ready(function () {
         console.log(gamedownloadid);
             $.ajax({
                 url: gdURL,
-                type: "POST",
+                type: "GET",
                 data: "",
                 success: function(data, textStatus, jqXHR) {
                 	$('#gameshare_dialog .modal-body form input:eq(0)').val(data.appType);
@@ -212,11 +187,13 @@ $(document).ready(function () {
 	
     $("#gameshare_form").on("submit", function(e) {
         var postData = $(this).serializeArray();
-        if(addgameshare){
-        var formURL = $(this).attr("action")+"?addgameshare=1";
+        var formURL = $(this).attr("action");
+        //console.log(postData);
+        if(gameid){
+        	postData.push({"name":"gameid","value":gameid});
         }
         else{
-        var formURL = $(this).attr("action")+"?id=" + gameshareid;
+        	postData.push({"name":"gameshareid","value":gameshareid});
         }
         //console.log(gameshareid);
         $.ajax({
@@ -237,42 +214,22 @@ $(document).ready(function () {
     
     $("#gamedownload_form").on("submit", function(e) {
         var postData = $(this).serializeArray();
-        if(addgamedownload){
-        var formURL = $(this).attr("action")+"?addgamedownload=1";
+        var formURL = $(this).attr("action");
+        if(gameid){
+        	postData.push({"name":"gameid","value":gameid});
         }
         else{
-        var formURL = $(this).attr("action")+"?id=" + gamedownloadid;	
+        	postData.push({"name":"gamedownloadid","value":gamedownloadid});
         }
         //console.log(gamedownloadid);
-=======
-		                    <button type="button" class="btn btn-default" id="submitForm">提交</button>
-		                </div>
-		            </div>
-		        </div>
-		    </div>
-	</div>
-<script th:fragment="javascript" th:inline="javascript">
-$(document).ready(function () {
-	var gameid;
-    $("#contact_form").on("submit", function(e) {
-        var postData = $(this).serializeArray();
-        var formURL = $(this).attr("action")+"?gameid=" + gameid;
-        console.log(gameid);
->>>>>>> origin/master
         $.ajax({
             url: formURL,
             type: "POST",
             data: postData,
             success: function(data, textStatus, jqXHR) {
-<<<<<<< HEAD
                 $('#gamedownload_dialog .modal-header .modal-title').html("结果");
                 $('#gamedownload_dialog .modal-body').html(data);
                 $("#gs_submitForm").remove();
-=======
-                $('#contact_dialog .modal-header .modal-title').html("结果");
-                $('#contact_dialog .modal-body').html(data);
-                $("#submitForm").remove();
->>>>>>> origin/master
             },
             error: function(jqXHR, status, error) {
                 console.log(status + ": " + error);
@@ -281,26 +238,12 @@ $(document).ready(function () {
         e.preventDefault();
     });
       
-<<<<<<< HEAD
 
     $('#gameshare_dialog, #gamedownload_dialog' ).on('hidden.bs.modal', function () {
-=======
-    $("#submitForm").on('click', function() {
-        $("#contact_form").submit();
-    });
-    
-    $('#contact_dialog').on('show.bs.modal', function (event) {  
-        var button = $(event.relatedTarget); // 触发事件的按钮  
-        gameid = button.data('gameid'); // 解析出data-whatever内容  
-
-    }); 
-    
-    $('#contact_dialog').on('hidden.bs.modal', function () {
->>>>>>> origin/master
     	window.location.reload();
     });
 });
 </script>
-<script th:fragment="javascript" src="style/js/layer/layer.js" th:src="@{/style/js/layer/layer.js}"></script>
+
 </body>
 </html>
