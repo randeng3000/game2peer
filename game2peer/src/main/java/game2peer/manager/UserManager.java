@@ -13,6 +13,7 @@ import game2peer.mvc.bean.UserRegister;
 import game2peer.mybatis.dao.BusiUserAccountDetailsMapper;
 import game2peer.mybatis.dao.BusiUserAccountMapper;
 import game2peer.mybatis.dao.BusiUserGalleryMapper;
+import game2peer.mybatis.dao.UserMailMapper;
 import game2peer.mybatis.dao.UserMapper;
 import game2peer.mybatis.domain.BusiUserAccount;
 import game2peer.mybatis.domain.BusiUserAccountDetails;
@@ -22,6 +23,8 @@ import game2peer.mybatis.domain.BusiUserGallery;
 import game2peer.mybatis.domain.BusiUserGalleryExample;
 import game2peer.mybatis.domain.User;
 import game2peer.mybatis.domain.UserExample;
+import game2peer.mybatis.domain.UserMail;
+import game2peer.mybatis.domain.UserMailExample;
 import game2peer.utility.MD5;
 import game2peer.utility.StringUtility;
 
@@ -45,6 +48,19 @@ public class UserManager {
 	@Autowired
 	private	BusiUserAccountDetailsMapper busiUserAccountDetailsMapper;
 
+	@Autowired
+	private UserMailMapper userMailMapper;
+	
+	public List<UserMail> getUserMail(String userId, int page)
+	{
+		UserMailExample example = new UserMailExample();
+		example.createCriteria().andUserIdEqualTo(userId);
+		example.setOrderByClause("create_time desc");
+		example.setLimitStart((page - 1)*10);
+		example.setLimitEnd(10);
+		return this.userMailMapper.selectByExample(example);
+	}
+	
 	public List<BusiUserAccountDetails> getAccountDetails(User user, String gameId)
 	{
 		BusiUserAccountDetailsExample ex = new BusiUserAccountDetailsExample();
