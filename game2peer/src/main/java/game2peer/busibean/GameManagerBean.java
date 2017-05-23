@@ -12,6 +12,7 @@ import game2peer.manager.ErrorMessage;
 import game2peer.manager.GameManager;
 import game2peer.mvc.bean.PageBean;
 import game2peer.mybatis.domain.User;
+import game2peer.utility.StringUtility;
 
 @Service
 public class GameManagerBean implements PageBean {
@@ -28,6 +29,36 @@ public class GameManagerBean implements PageBean {
 		   model.addAttribute("errorMessage", ErrorMessage.LOGIN_FIRST);	
 		}
 		else
+		{
+		   String oper = request.getParameter("oper");
+		   if (!StringUtility.isEmpty(oper))
+           {
+	           if (oper.equals("shareInsert"))
+	           {
+	        	   
+	           }
+	           else if (oper.equals("shareEdit"))
+	           {
+	        	   
+	           }
+	           else if (oper.equals("shareDel"))
+	           {
+	        	   
+	           }
+	           else if (oper.equals("downloadInsert"))
+	           {
+	        	   
+	           }
+	           else if (oper.equals("downloadEdit"))
+	           {
+	        	   
+	           }
+	           else if (oper.equals("downloadDel"))
+	           {
+	        	   
+	           }
+           }
            model.addAttribute("games", gameManager.getManagedGames(user.getId()));
+		}  
 	}
 }

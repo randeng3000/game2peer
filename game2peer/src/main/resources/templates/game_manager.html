@@ -18,6 +18,9 @@
     margin: 150px auto;
   }
 }
+.gmli figure ul li p span:hover{
+    color: #1abb9c;
+}
 
 }
 </style>
@@ -45,34 +48,44 @@
 				          </p>
 			          </div>
 		              <ul style="list-style-type: none;">
-		                 <li th:each="gameShares:${gameAdpater.shares}" th:attr="data-gameshareid=${gameShares.id}"  data-toggle="modal" data-target="#gameshare_dialog" >
+		                 <li th:each="gameShares:${gameAdpater.shares}" >
 		                    <!-- <a th:href="@{/pages/g/setGameShareInfo.shtml(id=${gameShares.id})}" th:text="#{编辑}">
 		                       <p><span th:text="#{说明}"></span>:<span th:text="${gameShares.description}"/></p>
 		                    </a> -->
-		                    <p><span th:text="#{说明}"></span>:<span th:text="${gameShares.description}"/></p>   
-		                    <p><span th:text="#{分成比例}"></span>:<span th:text="${gameShares.share}"/></p>
-		                    <p><span th:text="#{分成模式}"></span>:<span th:text="${gameShares.shareType}"/></p> 
+		                    <p>
+		                    <span th:attr="data-oper=shareEdit,data-gamecode=${gameAdpater.game.id},data-shareid=${gameShares.id}"  data-toggle="modal" data-target="#gameshare_dialog" >
+		                    <span th:text="#{说明}"/>:<span th:text="${gameShares.description}"/>&nbsp;&nbsp;
+		                    <span th:text="#{分成比例}"/>:<span th:text="${gameShares.share}"/>&nbsp;&nbsp;
+		                    <span th:text="#{分成模式}"/>:<span th:text="${gameShares.shareType}"/>
+		                    </span>
+		                    <a style="float: right;margin-right: 18px;margin-bottom: 5px;padding: 3px 5px;" class="btn btn-red" href="####" th:attr="data-oper=shareDel,data-gamecode=${gameAdpater.game.id},data-shareid=${gameShares.id}"  data-toggle="modal" data-target="#del_dialog" th:text="#{删除}"></a>
+		                    </p> 
 		                 </li>
 		       
 		                 <li>
 		                    <div>
-				              <a style="padding: 3px 5px;" class="btn btn-default" href="####" th:attr="data-gameid=${gameAdpater.game.id}"  data-toggle="modal" data-target="#gameshare_dialog" th:text="#{添加分成设置}"></a>
+				              <a style="padding: 3px 5px;" class="btn btn-default" href="####" th:attr="data-oper=shareInsert,data-gamecode=${gameAdpater.game.id}"  data-toggle="modal" data-target="#gameshare_dialog" th:text="#{添加分成设置}"></a>
 				            </div>
 		                 </li>
 		              </ul>
 		              <hr style="border: none;border-bottom: 1px solid #e1e1e1;padding:0px;margin:0px 10px 5px"/>
 		              <ul style="list-style-type: none;">
-		                 <li th:each="gameDownloads:${gameAdpater.downloads}" th:attr="data-gamedownloadid=${gameDownloads.gameId}" data-toggle="modal" data-target="#gamedownload_dialog">
+		                 <li th:each="gameDownloads:${gameAdpater.downloads}">
 		                    <!-- <a th:href="@{/pages/g/setGameDownloadInfo.shtml(gameId=${gameDownloads.gameId}, appType=${gameDownloads.appType})}" th:text="#{编辑}">
 		                       <p><span th:text="#{说明}"></span><span th:text="#{appType+${gameDownloads.appType}}"/></p>
 		                    </a> -->   
-		                    <p><span th:text="#{游戏平台}"></span>:<span th:text="#{appType+${gameDownloads.appType}}"/></p>
-		                    <p><span th:text="#{下载地址}"></span>:<span th:text="${gameDownloads.link}"/></p>
+		                    <p>
+		                    <span th:attr="data-oper=downloadEdit,data-gamecode=${gameAdpater.game.id},data-apptype=${gameDownloads.appType}" data-toggle="modal" data-target="#gamedownload_dialog">
+		                    <span th:text="#{游戏平台}"/>:<span th:text="#{appType+${gameDownloads.appType}}"/>&nbsp;&nbsp;
+		                    <span th:text="#{下载地址}"/>:<span th:text="${gameDownloads.link}"/>
+		                    </span>
+		                    <a style="float: right;margin-right: 18px;margin-bottom: 5px;padding: 3px 5px;" class="btn btn-red" href="####" th:attr="data-oper=downloadDel,data-gamecode=${gameAdpater.game.id},data-apptype=${gameDownloads.appType}"  data-toggle="modal" data-target="#del_dialog" th:text="#{删除}"></a>
+		                    </p>
 		                 </li>
 		                 
 		                 <li>
 		                    <div>
-				              <a style="padding: 3px 5px;" class="btn btn-default" href="####" th:attr="data-gameid=${gameAdpater.game.id}"  data-toggle="modal" data-target="#gamedownload_dialog" th:text="#{添加下载设置}"></a>
+				              <a style="padding: 3px 5px;" class="btn btn-default" href="####" th:attr="data-oper=downloadInsert,data-gamecode=${gameAdpater.game.id}"  data-toggle="modal" data-target="#gamedownload_dialog" th:text="#{添加下载设置}"></a>
 				            </div>
 		                 </li>
 		              </ul>
@@ -93,10 +106,11 @@
 		                <h4 class="modal-title">分成设置</h4>
 		            </div>
 		                <div class="modal-body">
-		                    <form id="gameshare_form" action="/pages/g/setGameShareInfo.shtml" method="POST">
+		                    <form id="gameshare_form" th:action="@{/api/gameShareInfo.json}" method="POST">
 		                        	说明: <input type="text" name="description"/><br/>
 		                        	分成比例: <input type="text" name="share"/><br/>
 		                        	分成模式: <input type="text" name="shareType"/><br/>
+		                        		   <input type="hidden" name="oper" value=""/>
 		                    </form>
 		                </div>
 		                <div class="modal-footer">
@@ -115,9 +129,10 @@
 		                <h4 class="modal-title">下载设置</h4>
 		            </div>
 		                <div class="modal-body">
-		                    <form id="gamedownload_form" action="/pages/g/setGameDownloadInfo.shtml" method="POST">
+		                    <form id="gamedownload_form" th:action="@{/api/gameDownloadInfo.json}" method="POST">
 		                        	游戏平台: <input type="text" name="appType"/><br/>
 		                        	下载地址: <input type="text" name="link"/><br/>
+		                        		   <input type="hidden" name="oper" value=""/>
 		                    </form>
 		                </div>
 		                <div class="modal-footer">
@@ -127,56 +142,94 @@
 		            </div>
 		        </div>
 		 </div>
+		 
+		 <div class="modal fade" id="del_dialog" role="dialog">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal">&times;</button>
+		                <h4 class="modal-title">删除</h4>
+		            </div>
+		                <div class="modal-body">
+		                    <form id="del_form" th:action="@{/api/gameDownloadInfo.json}" method="POST">
+		                    			<p>您确定删除这条记录吗?</p>
+		                        		<input type="hidden" name="oper" value=""/>
+		                    </form>
+		                </div>
+		                <div class="modal-footer">
+		                    <button type="button" class="btn btn-default" data-dismiss="modal" style="margin-left: 5px;margin-bottom: 0;">取消</button>
+		                    <button type="button" class="btn btn-red" id="del_submitForm">删除</button>
+		                </div>
+		            </div>
+		        </div>
+		 </div>
 	</div>
 <script th:fragment="javascript" th:inline="javascript">
 $(document).ready(function () {
-	var gameshareid;
-	var gamedownloadid;
-	var gameid;
-	
-    $('#gameshare_dialog, #gamedownload_dialog').on('show.bs.modal', function (event) {  
+	//元素属性
+	var shareid;
+	var gamecode;
+	var apptype;
+	var oper;
+	//弹出层弹出时提取元素属性
+    $('#gameshare_dialog, #gamedownload_dialog, #del_dialog').on('show.bs.modal', function (event) {  
         var button = $(event.relatedTarget); // 触发事件的按钮  
-        gameshareid = button.data('gameshareid'); // 解析出data-whatever内容 
-        gamedownloadid = button.data('gamedownloadid');
-        gameid = button.data('gameid');
-        //console.log(addgameshare);
-        var gsURL = $("#gameshare_form").attr("action")+"?gameshareid=" + gameshareid;
-        var gdURL = $("#gamedownload_form").attr("action")+"?gamedownloadid=" + gamedownloadid;
-        if(gameshareid)console.log(gameshareid);
-        if(gameshareid){
-		console.log(gameshareid);
-        $.ajax({
-            url: gsURL,
-            type: "GET",
-            data: "",
-            success: function(data, textStatus, jqXHR) {
-            	$('#gameshare_dialog .modal-body form input:eq(0)').val(data.description);
-            	$('#gameshare_dialog .modal-body form input:eq(1)').val(data.share);
-            	$('#gameshare_dialog .modal-body form input:eq(2)').val(data.shareType);
-            },
-            error: function(jqXHR, status, error) {
-                console.log(status + ": " + error);
-            }
-        });
+        shareid = button.data('shareid'); // 解析出data-whatever内容 
+        gamecode = button.data('gamecode'); // 解析出data-whatever内容\
+        apptype = button.data('apptype'); 
+        oper = button.data('oper');
+        console.log(oper);
+        //console.log(!(typeof(apptype)=="undefined"));
+        //var gsURL = $("#gameshare_form").attr("action")+"?shareid=" + shareid;
+        var gsURL = $("#gameshare_form").attr("action") + '?gameCode=' + gamecode + '%26shareId=' + shareid;
+            gsURL = decodeURIComponent(gsURL);
+        var gdURL = $("#gamedownload_form").attr("action")+'?gameCode=' + gamecode + '%26appType=' + apptype;
+        	gdURL = decodeURIComponent(gdURL);
+        	$("#gameshare_form input:eq(3)").val(oper);
+        	$("#gamedownload_form input:eq(2)").val(oper);
+        	$("#del_form input:eq(0)").val(oper);
+        //if(shareid)console.log(shareid);
+        //判断增或查
+        if(shareid){
+        	if(!(oper=="shareDel")){
+        		$.ajax({
+                    url: gsURL,
+                    type: "GET",
+                    data: "",
+                    success: function(data, textStatus, jqXHR) {
+                    	$('#gameshare_dialog .modal-body form input:eq(0)').val(data.description);
+                    	$('#gameshare_dialog .modal-body form input:eq(1)').val(data.share);
+                    	$('#gameshare_dialog .modal-body form input:eq(2)').val(data.shareType);
+                    },
+                    error: function(jqXHR, status, error) {
+                        console.log(status + ": " + error);
+                    }
+                });
+        	}
+		//console.log(shareid);
+        
         }
-        else if(gamedownloadid){
-        console.log(gamedownloadid);
-            $.ajax({
-                url: gdURL,
-                type: "GET",
-                data: "",
-                success: function(data, textStatus, jqXHR) {
-                	$('#gameshare_dialog .modal-body form input:eq(0)').val(data.appType);
-                	$('#gameshare_dialog .modal-body form input:eq(1)').val(data.link);
-                },
-                error: function(jqXHR, status, error) {
-                    console.log(status + ": " + error);
-                }
-            });
+        else if(!(typeof(apptype)=="undefined")){
+        	if(!(oper=="downloadDel")){
+        		$.ajax({
+                    url: gdURL,
+                    type: "GET",
+                    data: "",
+                    success: function(data, textStatus, jqXHR) {
+                    	$('#gamedownload_dialog .modal-body form input:eq(0)').val(data.appType);
+                    	$('#gamedownload_dialog .modal-body form input:eq(1)').val(data.link);
+                    },
+                    error: function(jqXHR, status, error) {
+                        console.log(status + ": " + error);
+                    }
+                });
+        	}
+        //console.log(apptype);
+            
         }
 
     }); 
-    
+    //绑定提交按钮
     $("#gs_submitForm").on('click', function() {
         $("#gameshare_form").submit();
     });
@@ -184,18 +237,23 @@ $(document).ready(function () {
     $("#gd_submitForm").on('click', function() {
         $("#gamedownload_form").submit();
     });
-	
+    
+    $("#del_submitForm").on('click', function() {
+        $("#del_form").submit();
+    });
+  //提交分成ajax
     $("#gameshare_form").on("submit", function(e) {
         var postData = $(this).serializeArray();
         var formURL = $(this).attr("action");
         //console.log(postData);
-        if(gameid){
-        	postData.push({"name":"gameid","value":gameid});
+        if(oper=="shareInsert"){
+        	//console.log(shareid);
+        	postData.push({"name":"gameCode","value":gamecode});
         }
         else{
-        	postData.push({"name":"gameshareid","value":gameshareid});
+        	postData.push({"name":"gameCode","value":gamecode},{"name":"shareId","value":shareid});
         }
-        //console.log(gameshareid);
+        //console.log(shareid);
         $.ajax({
             url: formURL,
             type: "POST",
@@ -203,7 +261,8 @@ $(document).ready(function () {
             success: function(data, textStatus, jqXHR) {
                 $('#gameshare_dialog .modal-header .modal-title').html("结果");
                 $('#gameshare_dialog .modal-body').html(data);
-                $("#gs_submitForm").remove();
+                $(".modal-footer .btn").remove();
+                window.location.reload();
             },
             error: function(jqXHR, status, error) {
                 console.log(status + ": " + error);
@@ -211,15 +270,15 @@ $(document).ready(function () {
         });
         e.preventDefault();
     });
-    
+  //提交游戏下载ajax
     $("#gamedownload_form").on("submit", function(e) {
         var postData = $(this).serializeArray();
         var formURL = $(this).attr("action");
-        if(gameid){
-        	postData.push({"name":"gameid","value":gameid});
+        if(oper=="downloadInsert"){
+        	postData.push({"name":"gameCode","value":gamecode});
         }
         else{
-        	postData.push({"name":"gamedownloadid","value":gamedownloadid});
+        	postData.push({"name":"gameCode","value":gamecode},{"name":"appType","value":apptype});
         }
         //console.log(gamedownloadid);
         $.ajax({
@@ -229,7 +288,8 @@ $(document).ready(function () {
             success: function(data, textStatus, jqXHR) {
                 $('#gamedownload_dialog .modal-header .modal-title').html("结果");
                 $('#gamedownload_dialog .modal-body').html(data);
-                $("#gs_submitForm").remove();
+                $(".modal-footer .btn").remove();
+                window.location.reload();
             },
             error: function(jqXHR, status, error) {
                 console.log(status + ": " + error);
@@ -237,11 +297,37 @@ $(document).ready(function () {
         });
         e.preventDefault();
     });
-      
-
-    $('#gameshare_dialog, #gamedownload_dialog' ).on('hidden.bs.modal', function () {
-    	window.location.reload();
+    //提交删除ajax
+    $("#del_form").on("submit", function(e) {
+        var postData = $(this).serializeArray();
+        //console.log(postData);
+        if(oper=="shareDel"){
+        	//console.log(shareid);
+        	var delURL = [[@{/api/gameShareInfo.json}]] + '?gameCode=' + gamecode + '%26shareId=' + shareid;
+        	delURL = decodeURIComponent(delURL);
+        }
+        else if(oper=="downloadDel"){
+        	var delURL = [[@{/api/gameDownloadInfo.json}]] + '?gameCode=' + gamecode + '%26appType=' + apptype;
+        	delURL = decodeURIComponent(delURL);
+        }
+        //console.log(shareid);
+        $.ajax({
+            url: delURL,
+            type: "GET",
+            data: postData,
+            success: function(data, textStatus, jqXHR) {
+                $('#gameshare_dialog .modal-header .modal-title').html("结果");
+                $('#gameshare_dialog .modal-body').html(data);
+                $(".modal-footer .btn").remove();
+                window.location.reload();
+            },
+            error: function(jqXHR, status, error) {
+                console.log(status + ": " + error);
+            }
+        });
+        e.preventDefault();
     });
+    
 });
 </script>
 

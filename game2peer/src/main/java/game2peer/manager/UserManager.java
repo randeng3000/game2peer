@@ -9,12 +9,16 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import game2peer.jdbctemplate.dao.SummaryDao;
+import game2peer.jdbctemplate.domain.SummaryBean;
 import game2peer.mvc.bean.UserRegister;
+import game2peer.mybatis.dao.BusiGameUserMapper;
 import game2peer.mybatis.dao.BusiUserAccountDetailsMapper;
 import game2peer.mybatis.dao.BusiUserAccountMapper;
 import game2peer.mybatis.dao.BusiUserGalleryMapper;
 import game2peer.mybatis.dao.UserMailMapper;
 import game2peer.mybatis.dao.UserMapper;
+import game2peer.mybatis.domain.BusiGameUserExample;
 import game2peer.mybatis.domain.BusiUserAccount;
 import game2peer.mybatis.domain.BusiUserAccountDetails;
 import game2peer.mybatis.domain.BusiUserAccountDetailsExample;
@@ -50,6 +54,12 @@ public class UserManager {
 
 	@Autowired
 	private UserMailMapper userMailMapper;
+	
+	@Autowired
+	private BusiGameUserMapper busiGameUserMapper;
+	
+	@Autowired
+	private SummaryDao summaryDao;
 	
 	public List<UserMail> getUserMail(String userId, int page)
 	{
@@ -177,4 +187,13 @@ public class UserManager {
 		example.createCriteria().andUserIdEqualTo(userId);
 		return this.busiUserGalleryMapper.selectByExample(example);
 	}
+	
+	public List<SummaryBean> getMyGameUserSummary(String userId, int page)
+	{
+		int size = 20;
+		List<SummaryBean> l = this.summaryDao.getMyGameUserSummary(userId, (page - 1)*size, size); 
+		//busiGameUserMapper
+		return l;
+	}
+	
 }
