@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+<link th:fragment="css" rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/style/jqgrid/css/ui.jqgrid-bootstrap.css}" />
+</head>
+<body>
+	<div th:fragment="content">
+		<div class="offset"></div>
+		<div class="light-wrapper">
+			<div class="container inner">
+			    <div class="alert alert-warning" th:if="${errorMessage}">
+			        <p th:text="#{${errorMessage}}"></p>
+			    </div>
+			    <ul>
+			       <li><img th:src="@{${@gameManager.getGameAdpater(gameId).game.logo}}"></img></li>
+			       <li th:text="${@gameManager.getGameAdpater(gameId).game.gameName}"></li>
+			    </ul>
+			    <div class="table-responsive">
+                   <table class="table">
+                      <thead>
+                         <tr>
+                          <th th:text="#{时间}"></th>
+                          <th th:text="#{说明}"></th>
+                          <th th:text="#{收入}"></th>
+                          <th th:text="#{支出}"></th>
+                          <th th:text="#{确认状态}"></th>
+                         </tr>  
+                      </thead>
+                      <tr th:each="account:${accountDetails}">
+                          <td th:text="${account.createTime}"></td> 
+                          <td th:text="${'shareType-' + account.shareType}"></td>
+                          <td th:if="${account.amount}  &gt; 0" th:text="${account.amount}"></td>
+                          <td th:if="${account.amount}  &lt; 0"></td>
+                          <td th:if="${account.amount} &lt; 0" th:text="${account.amount}"></td>
+                          <td th:if="${account.amount} &gt; 0"></td>
+                          <td th:if="${account.confirmed} == 0" th:text="#{未确认}"></td>
+                          <td th:if="${account.confirmed} &gt; 0" th:text="#{确认}"></td>
+		              </tr>
+                   </table>
+                </div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

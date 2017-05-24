@@ -30,6 +30,7 @@ public class GameManagerBean implements PageBean {
 		}
 		else
 		{
+			
 		   String oper = request.getParameter("oper");
 		   if (!StringUtility.isEmpty(oper))
            {

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+	<style th:fragment="css" type="text/css">
+@media ( min-width : 1200px) {
+	.detailpagerow {
+		width: 980px;
+	}
+}
+
+.detailpagerow {
+	margin: 0 auto;
+}
+
+.left {
+	padding-left: 33px;
+}
+/* .mask{
+	display: block;
+    position: absolute;
+    top: 0;
+    left: 50px;
+    z-index: 1;
+    width: 177px;
+    height: 177px;
+    background: url(https://s.mzstatic.com/htmlResources/77ec/web-storefront/images/mask175.png) 0 0 no-repeat;
+    background-size: 175px 175px;
+} */
+.artwork {
+	position: relative;
+	text-align: center;
+	margin-bottom: 15px;
+	/* height: 180px; */
+}
+
+.side1 {
+	margin-top: 20px;
+}
+</style>
+	<!--/.navbar -->
+	<div th:fragment="content">
+		<div class="offset"></div>
+		<div class="light-wrapper">
+			<div class="container inner">
+				<div class="row">
+					<div class="alert alert-warning" th:if="${errorMessage}">
+			           <p th:text="#{${errorMessage}}"></p>
+			        </div>
+					<form th:object="${game}" class="form-horizontal" th:action="@{/pages/g/setGameInfo.shtml}" method="POST">
+						<fieldset>
+							<div class="control-group">
+								<!-- Text input-->
+								<label class="control-label" for="input01">名称</label>
+								<div class="controls">
+									<input type="text" placeholder="游戏名称" name="gameName"
+										class="input-medium" th:field="*{gameName}"/>
+								</div>
+							</div>
+							<div class="control-group">
+								<!-- Select Basic -->
+								<label class="control-label">语言</label>
+								<div class="controls">
+									<select class="input-medium" name="lang" th:field="*{lang}">
+										<option value ="zh_CN" selected="selected">中文</option>
+										<option value ="en_US">英文</option>
+										<option value ="zh_TW">繁体中文</option>
+									</select>
+								</div>
+							</div>
+							<div class="control-group">
+								<!-- Select Basic -->
+								<label class="control-label">类型</label>
+								<div class="controls">
+									<input type="text" placeholder="游戏类型" name="gameType"
+										class="input-medium" />
+								</div>
+							</div>
+							<div class="control-group">
+								<!-- Textarea -->
+								<label class="control-label">简介</label>
+								<div class="controls">
+									<div class="textarea">
+										<textarea type="" class="" name="summary" th:field="*{summary}"> </textarea>
+									</div>
+								</div>
+							</div>
+							<div class="control-group">
+								<!-- Textarea -->
+								<label class="control-label">详情</label>
+								<div class="controls">
+									<div class="textarea">
+										<textarea type="" class="" name="description" th:field="*{description}"> </textarea>
+									</div>
+								</div>
+							</div>
+							<div class="control-group">
+								<!-- Select Basic -->
+								<label class="control-label">注册页类型</label>
+								<div class="controls">
+									<select class="input-medium" name="registerUi">
+										<option value="1" selected="selected">标准1</option>
+										<option value="2">标准2</option>
+										<option value="3">标准3</option>
+										<option value="4">标准4</option>
+									</select>
+								</div>
+
+							</div>
+							<div class="control-group">
+								<label class="control-label">注册回调</label>
+								<div class="controls">
+									<input type="text" placeholder="注册完成后回调的URL"
+										class="input-medium" name="registerCallback"/>
+									<p class="help-block">请参阅注册回调服务接口规范</p>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">特定注册地址</label>
+								<div class="controls">
+									<input type="text" placeholder="分享时使用的注册地址"
+										class="input-medium" name="registerWithDomain"/>
+									<p class="help-block">不指定，将使用默认地址</p>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">图标</label>
+								<!-- Button -->
+								<div class="controls">
+									<button class="btn btn-primary">图标</button>
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label">主图</label>
+								<!-- Button -->
+								<div class="controls">
+									<button class="btn btn-primary">主图</button>
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<button type="submit" class="btn btn-primary" name="submit" value="submit">提交</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<!-- /.row -->
+			</div>
+		</div>
+	</div>
+</body>
+</html>

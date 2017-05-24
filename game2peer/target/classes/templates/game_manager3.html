@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+<link th:fragment="css" rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/style/jqgrid/css/ui.jqgrid-bootstrap.css}" />
+</head>
+<body>
+	<div th:fragment="content">
+		<div class="offset"></div>
+		<div class="light-wrapper">
+			<div class="container inner">
+			    <div class="alert alert-warning" th:if="${errorMessage}">
+			        <p th:text="#{${errorMessage}}"></p>
+			    </div>
+				<div>
+				   <a th:href="@{/pages/g/setGameInfo.shtml}" th:text="#{添加游戏}"></a>
+				</div>   
+				<ul class="items col4 isotope" style="position: relative; overflow: hidden; height: 868px;">
+		          <li th:each="gameAdpater:${games}" class="item thumb graphic isotope-item" style="position: absolute; left: 0px; top: 0px; -webkit-transform: translate(0px, 0px);">
+		            <figure>
+		              <img th:src="${gameAdpater.game.CoverImage}" alt=""></img>
+		              <a th:href="@{/pages/g/gameDetails.shtml(id=${gameAdpater.game.id})}">
+			              <p><span  th:text="${gameAdpater.game.gameName}"></span></p>
+		              </a>
+		              <p><span  th:text="${{gameAdpater.game.createDate}}"></span></p>
+			          <p><a th:href="@{/pages/g/setGameInfo.shtml(id=${gameAdpater.game.id})}" th:text="#{编辑}"></a></p>
+		              <ul>
+		                 <li th:each="gameShares:${gameAdpater.shares}">
+		                    <a th:href="@{/pages/g/setGameShareInfo.shtml(id=${gameShares.id})}" th:text="#{编辑}">
+		                       <p><span th:text="#{说明}"></span><span th:text="${gameShares.description}"/></p>
+		                    </a>   
+		                    <p><span th:text="#{分成比例}"></span><span th:text="${gameShares.share}"/></p>
+		                    <p><span th:text="#{分成模式}"></span><span th:text="${gameShares.shareType}"/></p> 
+		                 </li>
+		                 <li>
+		                    <div>
+				              <a th:href="@{/pages/g/setGameShareInfo.shtml}" th:text="#{添加分成设置}"></a>
+				            </div>
+		                 </li>
+		              </ul>
+		              <ul>
+		                 <li th:each="gameDownloads:${gameAdpater.downloads}">
+		                    <a th:href="@{/pages/g/setGameDownloadInfo.shtml(gameId=${gameDownloads.gameId, appType=${gameDownloads.appType}})}" th:text="#{编辑}">
+		                       <p><span th:text="#{说明}"></span><span th:text="#{appType+${gameDownloads.appType}}"/></p>
+		                    </a>   
+		                    <p><span th:text="#{分成比例}"></span><span th:text="${gameDownloads.link}"/></p>
+		                 </li>
+		                 <li>
+		                    <div>
+				              <a th:href="@{/pages/g/setGameDownloadInfo.shtml}" th:text="#{添加下载设置}"></a>
+				            </div>
+		                 </li>
+		              </ul>
+				      
+		            </figure>
+		          </li>
+		        </ul>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

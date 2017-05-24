@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+<link th:fragment="css" rel="stylesheet" type="text/css" media="screen"
+	th:href="@{/style/jqgrid/css/ui.jqgrid-bootstrap.css}" />
+</head>
+<body>
+	<div th:fragment="content">
+		<div class="offset"></div>
+		<div class="light-wrapper">
+			<div class="container inner">
+				<div class="section-title-wrapper">
+				    <img id="img1"></img>
+				    <iframe>
+				    <div>
+					   <input id="imgfile" name="imgfile" type="file" accept="image/png,image/gif"/>
+					   <button id="uploadbutton" type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+					</div>
+				    </iframe>
+				</div>
+				<div style="margin-left: 20px">
+					<table id="jqGrid"></table>
+					<div id="jqGridPager"></div>
+				</div>
+				<a href="/pages/g/setGameInfo.shtml">添加游戏</a>
+			</div>
+		</div>
+	</div>
+
+	<script th:fragment="javascript" th:inline="javascript"	type="text/javascript"> 
+        $(document).ready(function () {
+        	
+            $("#uploadbutton").click(function () {
+                    ajaxFileUpload();
+            })
+            
+            function ajaxFileUpload() {
+                $.ajaxFileUpload
+                (
+                    {
+                        url: '/api/uploadimage.json', secureuri: false, //是否需要安全协议，一般设置为false
+                        fileElementId: 'imgfile', //文件上传域的ID
+                        dataType: 'json', //返回值类型 一般设置为json
+                        success: function (data, status)  //服务器成功响应处理函数
+                        {
+                            
+                            if (typeof (data.error) != 'undefined') {
+                                if (data.error != '') {
+                                    alert(data.error);
+                                } else {
+                                    alert(data.msg);
+                                }
+                            }
+                            else
+                            {
+                            	$("#img1").attr("src", data.imgurl);
+                            }	
+                        },
+                        error: function (data, status, e)//服务器响应失败处理函数
+                        {
+                            alert(e);
+                        }
+                    }
+                )
+                return false;
+            }
+
+        	
+        	$("#jqGrid").jqGrid({
+                url: [[@{/api/mygames.json}]],
+                datatype: "json",
+                colModel: [
+                    { label: 'id', name: 'id', key: true, width: 75 },
+                    { label: 'userId', name: 'userId', width: 150 },
+                    { label: 'gameName', name: 'gameName', width: 150 },
+                    { label: 'summary', name: 'summary', width: 150 }                    
+                ],
+                viewrecords: true, // show the current page, data rang and total records on the toolbar
+                styleUI : 'Bootstrap',
+        		width: 780,
+        		height: 200,
+        		rowNum: 30,
+        		loadonce: true, // this is just for the demo
+        		pager: "#jqGridPager"
+            });
+        });
+    </script>
+    <script th:fragment="javascript" type="text/javascript"
+		th:src="@{|/style/js/ajaxfileupload.js|}"></script>
+	<!-- We support more than 40 localizations -->
+	<script th:fragment="javascript" type="text/javascript"
+		th:src="@{|/style/jqgrid/js/i18n/grid.locale-#{Locale}.js|}"></script>
+	<!-- This is the Javascript file of jqGrid -->
+	<script th:fragment="javascript" type="text/javascript"
+		th:src="@{/style/jqgrid/js/jquery.jqGrid.min.js}"></script>
+</body>
+</html>
